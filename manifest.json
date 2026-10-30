@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "SmartGov PBB Automator",
+  "version": "4.3.0",
+  "description": "Dashboard SmartGov dengan Batch Merge dan antrean Auto Print senyap menggunakan printer yang dikonfigurasi pada masing-masing komputer.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting",
+    "downloads",
+    "storage",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "SmartGov PBB Automator",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_smartgov.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "content_wa.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_pbb_check.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://asiap.bapenda.pekanbaru.go.id/*"
+      ],
+      "js": [
+        "content_petugas.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
